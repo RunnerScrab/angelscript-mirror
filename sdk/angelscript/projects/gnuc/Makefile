@@ -28,7 +28,7 @@ ARLIB=$(LIBNAME).a
 
 ## install directories
 ifeq ($(PREFIX),)
-PREFIX=/usr/local
+PREFIX=/usr
 endif
 INCLUDEDIR_DEST=$(PREFIX)/include
 LIBDIR_DEST=$(PREFIX)/lib
@@ -48,6 +48,7 @@ CP_R = cp -R
 
 
 HEADER = angelscript.h
+JITHEADER = as_jit.h
 SRCDIR = ../../source
 INCDIR = ../../include
 
@@ -82,9 +83,9 @@ else
 	OBJDIR = obj
 	LIBDIR = ../../lib
 	CXX ?= g++
-	# On i686 architecture you may need to add -march=i686 if you get 
+	# On i686 architecture you may need to add -march=i686 if you get
 	# an undefined symbol for __sync_sub_and_fetch_4 in as_atomic.cpp.
-	CXXFLAGS += -Wall -fPIC -fno-strict-aliasing
+	CXXFLAGS += -Wall -fPIC -fno-strict-aliasing -pthread
 endif
 
 ## toolchain
@@ -129,6 +130,11 @@ SRCNAMES = \
   as_tokenizer.cpp \
   as_typeinfo.cpp \
   as_variablescope.cpp \
+  as_jit.cpp \
+  virtual_asm_linux.cpp \
+  virtual_asm_x64.cpp \
+  scriptarray.cpp \
+  scriptstdstring.cpp
 
 OBJ = $(addprefix $(OBJDIR)/, $(notdir $(SRCNAMES:.cpp=.o)))
 
@@ -177,6 +183,8 @@ $(LIBDIR)/$(ARLIB): $(OBJ)
 install_header: $(INCDIR)/$(HEADER)
 	$(INSTALL_DIR) "$(DESTDIR)/$(INCLUDEDIR_DEST)"
 	$(INSTALL_HEADER) "$(INCDIR)"/$(HEADER) "$(DESTDIR)/$(INCLUDEDIR_DEST)/"$(HEADER)
+	$(INSTALL_HEADER) "$(INCDIR)"/$(JITHEADER) "$(DESTDIR)/$(INCLUDEDIR_DEST)/"$(JITHEADER)
+
 
 install_shared:
 	$(INSTALL_DIR) "$(DESTDIR)/$(LIBDIR_DEST)"
