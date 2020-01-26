@@ -132,12 +132,7 @@ SRCNAMES = \
   as_variablescope.cpp \
   as_jit.cpp \
   virtual_asm_linux.cpp \
-  virtual_asm_x64.cpp \
-  scriptarray.cpp \
-  scriptstdstring.cpp \
-  scriptmath.cpp \
-  scriptmathcomplex.cpp \
-  scriptdictionary.cpp
+  virtual_asm_x64.cpp
 
 OBJ = $(addprefix $(OBJDIR)/, $(notdir $(SRCNAMES:.cpp=.o)))
 
