@@ -1001,6 +1001,7 @@ public:
 	// Memory management
 	virtual int                    AddRef() const = 0;
 	virtual int                    Release() const = 0;
+	virtual int			GetRefCount() = 0;
 	virtual asILockableSharedBool *GetWeakRefFlag() const = 0;
 
 	// Type info
