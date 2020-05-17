@@ -21,7 +21,7 @@
 
 ## library names and versions
 LIBNAME=libangelscript
-AS_VER:=$(shell awk -F\" '/\#define ANGELSCRIPT_VERSION_STRING/{print $$2}' ../../include/angelscript.h | cut -d" " -f1)
+AS_VER:=$(shell awk -F\" '#define ANGELSCRIPT_VERSION_STRING/{print $$2}' ../../include/angelscript.h | cut -d" " -f1)
 SHLIB=$(LIBNAME).so.$(AS_VER)
 ARLIB=$(LIBNAME).a
 
